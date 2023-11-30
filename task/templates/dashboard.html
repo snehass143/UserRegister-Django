@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Registration details</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            padding-top: 56px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            width: 200px; /* Set the width of the sidebar */
+        }
+
+        .sidebar-sticky {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .sidebar a {
+            color: black; /* Set the color of sidebar links to black */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .sidebar a:hover {
+            color: #007bff; /* Change color on hover */
+        }
+
+        main {
+            margin-left: 200px; /* Set the margin to accommodate the sidebar */
+            padding-top: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: center;
+        }
+
+        .btn {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'register' %}">
+                        Add Register Form
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'dashboard' %}">
+                        List Registration details
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'logout' %}">
+                        Logout
+                    </a>
+                </li>
+                <!-- Add other sidebar links here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main role="main">
+        <h2 class="text-center mb-4">List Registration details</h2>
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in registered_users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.phone_number }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'edit_user' user.id %}'">Edit</button>
+                            <button type="button" class="btn btn-danger" onclick="window.location.href=('{% url 'delete_user' user.id %}')">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Bootstrap JS and jQuery via CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom scripts or additional scripts can be added here -->
+</body>
+</html>
